@@ -10,9 +10,7 @@ https://dl.1753ctf.com/matrix-preloaded?s=Dgr59R5h
 
 ## Solution
 
-When invoked with `subprocess.run` the `LD_PRELOAD` directive has no effect. As a result the seccomp filter doesn't apply and you can use any syscalls.
-
-Somewhat unusually we must supply an elf rather than shellcode.
+When invoked with a static binary the `LD_PRELOAD` directive has no effect. As a result the seccomp filter doesn't apply and you can use any syscalls.
 
 ```
 ; nasm -felf64 shellcode.asm && ld shellcode.o -o shellcode

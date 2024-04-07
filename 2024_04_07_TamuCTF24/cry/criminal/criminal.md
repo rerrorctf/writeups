@@ -10,7 +10,7 @@ Note: the flag matches the regex gigem{[a-z_]+} (the curly braces are not quanti
 
 This task is based on the https://en.wikipedia.org/wiki/CRIME vuln from 2012.
 
-The idea is that when compress data prior to encryption the length of the ciphertext can be used to determine the plaintext.
+The idea is that when you compress data prior to encryption the length of the ciphertext can be used to determine the plaintext.
 
 We can see from the following code that the size of the compressed result is smaller when the suffix matches the prefix:
 

@@ -99,10 +99,7 @@ There are multiple ways of bypassing this anti debugging technique, patching was
 
 We will bypass the check and go into the branch where there is no `exit()` syscall. From ths point its straight forward gdb grind. At one point decrypted auth code is calling `memcmp()`
 
-``` ► 0x55555555591e <auth+293>    call   memcmp@plt                <memcmp@plt>
-        s1: 0x7fffffffdd90 ◂— xor byte ptr [rbp + r10*2 + 0x72], r14b /* 0x6d304d725574304e; 'N0tUrM0msP4sswd!AAAAAA\n' */
-        s2: 0x7fffffffdda0 ◂— or al, byte ptr [r8] /* 0xa414141414141; 'AAAAAA\n' */
-```
+![pwndbg](pwndbg.png)
 
 My input was just `AAAAAA`, but that `N0tUrM0msP4sswd!` was worth a check, since we were supposed to check this remotely it seems it actually gave a flag:
 

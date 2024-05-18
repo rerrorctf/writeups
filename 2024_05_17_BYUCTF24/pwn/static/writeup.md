@@ -21,7 +21,7 @@ We will use a `syscall` gadget to perform `execve("/bin/sh\x00", 0, 0)`.
 
 ### Preparing String Arguments
 
-In order to make the call to `execve` we need to be able to point the string `"/bin/sh\x00"`.
+In order to make the call to `execve` we need to be able to point to the string `"/bin/sh\x00"`.
 
 Through debugging its possible to determine that value of the register `rsi` closely relates to address of the start the buffer we control on the stack.
 

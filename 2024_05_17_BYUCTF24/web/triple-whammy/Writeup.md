@@ -17,6 +17,8 @@ so try to use something like https://requestcatcher.com/ (which is confirmed to 
 
 <p> In this challenge they gave us source code of the server and admin bot source code </p>
 
+server.py
+
 ```
 from flask import Flask, request
 from urllib.parse import urlparse
@@ -81,7 +83,66 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=1337, threaded=True)
 ```
 
-As we can see there is XSS vector on this line ` return 'Nope still no front end, front end is for noobs '+name`
+admin_bot.js
+
+```
+const express = require('express');
+const puppeteer = require('puppeteer');
+const escape = require('escape-html');
+const fs = require('fs');
+
+const app = express()
+app.use(express.urlencoded({ extended: true }));
+
+const SECRET = fs.readFileSync('secret.txt', 'utf8').trim()
+const CHAL_URL = 'http://127.0.0.1:1337/'
+
+// go to the page specified by the path, using a secret session cookie
+const visitUrl = async (url) => {
+
+    let browser =
+            await puppeteer.launch({
+                headless: "new",
+                pipe: true,
+                dumpio: true,
+
+                // headless chrome in docker is not a picnic
+                args: [
+                    '--no-sandbox',
+                    '--disable-gpu',
+                    '--disable-software-rasterizer',
+                    '--disable-dev-shm-usage',
+                    '--disable-setuid-sandbox',
+                    '--js-flags=--noexpose_wasm,--jitless'
+                ]
+            })
+
+    try {
+        const page = await browser.newPage()
+
+        try {
+            await page.setUserAgent('puppeteer');
+            let cookies = [{
+                name: 'secret',
+                value: SECRET,
+                domain: '127.0.0.1',
+                httpOnly: true
+            }]
+            await page.setCookie(...cookies)
+            await page.goto(url, { timeout: 5000, waitUntil: 'networkidle2' })
+        } finally {
+            await page.close()
+        }
+    }
+    finally {
+        browser.close()
+        return
+    }
+}
+...
+```
+
+As we can see there is XSS vector on this line in server.py ` return 'Nope still no front end, front end is for noobs '+name`
 Another endpoint is `/query` where we can see if cookie is matching the secret it takes `url` parameter which is being parsed and
 there is a check that url has to have scheme of `http` or `https` and that hostname is `127.0.0.1`- on valid url server will make a request to it. 
 Which concludes that this will be *SSRF*  with local service in play. There was yet another file called internal.py which we were supposed to bypass to get the flag.

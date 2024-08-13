@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|604 | LIT CTF 2024 |333.0000|
 |32 |TFC CTF 2024 |2552.0000|
 |341 |DeadSec CTF 2024 |200.0000|
 |149 |ImaginaryCTF 2024 |1734.0000|

@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|225 | CSAW CTF Qualification Round 2024 | 1208.0000|
 |752 | idekCTF 2024 | 100.0000|
 |604 | LIT CTF 2024 |333.0000|
 |32 |TFC CTF 2024 |2552.0000|

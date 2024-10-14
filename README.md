@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|28 | Blue Water CTF 2024 | 607.0000|
 |155 | BuckeyeCTF 2024 | 720.0000|
 |225 | CSAW CTF Qualification Round 2024 | 1208.0000|
 |752 | idekCTF 2024 | 100.0000|

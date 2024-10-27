@@ -28,7 +28,7 @@ for n, k in enumerate(keys):
     print(f"k{n} = {k[3:]}")
 ```
 
-A 3 byte bruteforce is very doable and a 6 byte bruteforce is not. Therefore our best hope is to deploy the meet in the middle attack to do around 2^48 work to recover both keys.
+A 3 byte bruteforce is very doable and a 6 byte bruteforce is not. Therefore our best hope is to deploy the meet in the middle attack to do around 2^12 work to recover both keys.
 
 The last component we need is a known plaintext/ciphertext pair:
 

@@ -87,7 +87,7 @@ An alternative way to implement the wrapping with the `struct` module might look
 ```python
 def inc_ctr(ctr: bytearray) -> bytearray:
     c = struct.unpack('>Q', ctr[-8:])[0]
-    ctr[-8:] = struct.pack('>Q', (c - 1) & 0xffffffffffffffff)
+    ctr[-8:] = struct.pack('>Q', (c + 1) & 0xffffffffffffffff)
     return ctr
 ```
 

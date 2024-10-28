@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|91 | HeroCTF v6 | 1402.0000|
 |65 | SunshineCTF 2024 | 1068.0000|
 |28 | Blue Water CTF 2024 | 607.0000|
 |155 | BuckeyeCTF 2024 | 720.0000|

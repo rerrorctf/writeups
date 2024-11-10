@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|26 | BlueHens CTF 2024 | 4758.0000|
 |107 | Hack The Vote 2024 | 101.0000|
 |91 | HeroCTF v6 | 1402.0000|
 |65 | SunshineCTF 2024 | 1068.0000|

@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|217 | 1337UP LIVE CTF | 962.0000|
 |26 | BlueHens CTF 2024 | 4758.0000|
 |107 | Hack The Vote 2024 | 101.0000|
 |91 | HeroCTF v6 | 1402.0000|

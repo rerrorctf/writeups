@@ -6,6 +6,8 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|342 | World Wide CTF 2024 | 145.0000|
+|33 | GlacierCTF 2024 | 1263.0000|
 |217 | 1337UP LIVE CTF | 962.0000|
 |26 | BlueHens CTF 2024 | 4758.0000|
 |107 | Hack The Vote 2024 | 101.0000|

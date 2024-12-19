@@ -6,6 +6,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|145 | niteCTF 2024 | 227.0000|
 |342 | World Wide CTF 2024 | 145.0000|
 |33 | GlacierCTF 2024 | 1263.0000|
 |217 | 1337UP LIVE CTF | 962.0000|

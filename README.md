@@ -2,11 +2,16 @@
 
 <img src="https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e" alt="rounding error ctf team logo" width="400"/>
 
-# 2024
+# 2025
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
 |481 | UofTCTF 2025 | 300.0000|
+
+# 2024
+
+|Place|Event|CTF Points|
+|-----|-----|----------|
 |145 | niteCTF 2024 | 227.0000|
 |342 | World Wide CTF 2024 | 145.0000|
 |33 | GlacierCTF 2024 | 1263.0000|

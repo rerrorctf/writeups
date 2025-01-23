@@ -1,11 +1,14 @@
 # writeups
 
+[278496](https://ctftime.org/team/278496)
+
 <img src="https://github.com/rerrorctf/ret/assets/93072266/5a998dbb-5730-4b10-9636-45e35e9fe77e" alt="rounding error ctf team logo" width="400"/>
 
 # 2025
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|266 | Srdnlen CTF 2025 | 60.0000|
 |481 | UofTCTF 2025 | 300.0000|
 
 # 2024

@@ -8,6 +8,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|99 | BearcatCTF 2025: World Tour | 1600.0000|
 |82 | x3CTF 2025 (feat. mvm) | 0.0000|
 |266 | Srdnlen CTF 2025 | 60.0000|
 |481 | UofTCTF 2025 | 300.0000|

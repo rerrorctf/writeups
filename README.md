@@ -16,6 +16,8 @@
 
 # 2024
 
+Overall rating place: 414 with 114.340 pts in 2024
+
 |Place|Event|CTF Points|
 |-----|-----|----------|
 |145 | niteCTF 2024 | 227.0000|

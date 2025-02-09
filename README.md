@@ -8,6 +8,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|135 | BITSCTF 2025 | 891.0000|
 |99 | BearcatCTF 2025: World Tour | 1600.0000|
 |82 | x3CTF 2025 (feat. mvm) | 433.0000|
 |266 | Srdnlen CTF 2025 | 60.0000|

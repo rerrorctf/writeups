@@ -2,4 +2,4 @@
 
 https://ctftime.org/event/2677/
 
-??th place ?? points
+87th place 1067 points

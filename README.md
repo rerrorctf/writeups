@@ -8,6 +8,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|516 | BroncoCTF 2025 | 31.0000|
 |87 | EHAX CTF 2025 | 1067.0000|
 |135 | BITSCTF 2025 | 891.0000|
 |99 | BearcatCTF 2025: World Tour | 1600.0000|

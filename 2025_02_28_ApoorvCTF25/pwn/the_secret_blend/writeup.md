@@ -266,7 +266,7 @@ Here are the SHA-2-256 hashes for the files provided:
 e5896e1f6090ca03ab3739c3bba4124c11b3965ed735d9a36b162d2a66abccc0  secret_blend
 ```
 
-I contact the admins to let them know that I thought there might be a difference between the binary in the handout and the one on the remote and they assured me that the "Dockerfile copies from local" and that "I assure you local file hasnt[sic] changed".
+I contacted the admins to let them know that I thought there might be a difference between the binary in the handout and the one on the remote and they assured me that the "Dockerfile copies from local" and that "I assure you local file hasnt[sic] changed".
 
 Again if there is an explanation for this that allows for the binary to match the one in the handout I would like to know it is so please do let me know!
 

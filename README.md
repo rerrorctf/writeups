@@ -8,6 +8,8 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|389 | PwnMe CTF Quals 2025 | 150.0000|
+|389 | ApoorvCTF 2025 | 150.0000|
 |516 | BroncoCTF 2025 | 31.0000|
 |87 | EHAX CTF 2025 | 1067.0000|
 |135 | BITSCTF 2025 | 891.0000|

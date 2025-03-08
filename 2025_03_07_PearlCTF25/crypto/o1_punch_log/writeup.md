@@ -103,8 +103,8 @@ flag += int(SmartAttack(E.lift_x(v[0]), E.lift_x(v[1]), p)).to_bytes(length=5, b
 
 alphabet = ascii_letters + "0123456789"
 permutations = [''.join(p) for p in product(alphabet, repeat=3)]
-for permuation in permutations:
-    n = int.from_bytes(b"{s" + permuation.encode(), byteorder="big")
+for permutation in permutations:
+    n = int.from_bytes(b"{s" + permutation.encode(), byteorder="big")
     if (n * E.lift_x(v[1]))[0] == v[2]:
         flag += n.to_bytes(length=5, byteorder="big")
         break

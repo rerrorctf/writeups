@@ -8,6 +8,8 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|103 |KalmarCTF 2025 | 541.0000|
+|64 | Pearl CTF | 1600.0000|
 |389 | PwnMe CTF Quals 2025 | 150.0000|
 |389 | ApoorvCTF 2025 | 150.0000|
 |516 | BroncoCTF 2025 | 31.0000|

@@ -53,7 +53,6 @@ We just need to make sure that we can control `pt` such that `pt = attacker_pref
 # we can ignore the suffix and so this becomes:
 # pt = prefix + secret
 # ...which is the standard form for ecb byte-at-a-time decryption
-# e.g. https://www.cryptopals.com/sets/2/challenges/12
 
 def make_plaintext(prefix):
     attempt = 0

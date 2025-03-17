@@ -8,6 +8,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|101 |Nowruz 1404 | 1225.0000|
 |103 |KalmarCTF 2025 | 541.0000|
 |64 | Pearl CTF | 1600.0000|
 |389 | PwnMe CTF Quals 2025 | 150.0000|

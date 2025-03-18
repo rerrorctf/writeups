@@ -14,7 +14,7 @@ This is opposed to the usual `(p - 1) * (q - 1) != φ` when `p = q` because this
 
 ## Solution
 
-1) Take the square of `n` to recover `p`.
+1) Take the square root of `n` to recover `p`.
 2) Compute `phi = p * (p - 1)`.
 3) Recover `d = pow(e, -1, phi)`
 4) Decrypt flag.

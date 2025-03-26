@@ -9,6 +9,7 @@
 |Place|Event|CTF Points|
 |-----|-----|----------|
 |106 |WolvCTF 2025 | 1784.0000|
+|1930 |Cyber Apocalypse CTF 2025: Tales from Eldoria | 7925.0000|
 |101 |Nowruz 1404 | 1225.0000|
 |238 |UTCTF 2025 | 2657.0000|
 |103 |KalmarCTF 2025 | 541.0000|

@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+from hashlib import md5, sha256, sha512
+
+flag_hash = bytes.fromhex("f600d59a5cdd245a45297079299f2fcd811a8c5461d979f09b73d21b11fbb4f899389e588745c6a9af13749eebbdc2e72336cc57ccf90953e6f9096996a58dcc")
+
+f = open("/opt/SecLists/Passwords/Leaked-Databases/rockyou.txt", "r")
+
+for i in range(14344391):
+    try:
+        p = f.readline().strip().encode()
+    except:
+        continue
+
+    if len(p) != 10:
+        continue
+
+    flag = b"swampCTF{" + p + b"}" 
+    h = flag
+
+    for j in range(100):
+        h = md5(h).digest()
+
+    for j in range(100):
+        h = sha256(h).digest()
+
+    for j in range(100):
+        h = sha512(h).digest()
+
+    if h == flag_hash:
+        print(flag.decode()) # swampCTF{secretcode}
+        break

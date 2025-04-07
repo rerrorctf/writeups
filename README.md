@@ -10,6 +10,7 @@
 |-----|-----|----------|
 |173 |TAMUctf 2025 | 210.0000|
 |259 |SwampCTF 2025 | 658.0000|
+|503 |DiceCTF 2025 Quals | 105.00000|
 |106 |WolvCTF 2025 | 1784.0000|
 |1930 |Cyber Apocalypse CTF 2025: Tales from Eldoria | 7925.0000|
 |101 |Nowruz 1404 | 1225.0000|

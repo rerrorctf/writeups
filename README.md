@@ -8,6 +8,7 @@
 
 |Place|Event|CTF Points|
 |-----|-----|----------|
+|128 |squ1rrel CTF 2025 | 1578.0000|
 |173 |TAMUctf 2025 | 210.0000|
 |259 |SwampCTF 2025 | 658.0000|
 |503 |DiceCTF 2025 Quals | 105.00000|

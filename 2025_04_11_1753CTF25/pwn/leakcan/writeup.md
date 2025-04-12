@@ -24,7 +24,7 @@ $ pwn checksec ./leakcan_chall
 
 - Calls `read(0, local_68, 0x78)` twice
     - This lets us leak the canary by sending 0x59 bytes and reading the next 7 bytes
-        - Note that if we `sendlineafter` with 0x58 `b"A"`'s and this will also send a new line totally 0x59 bytes
+        - Note that if we `sendlineafter` with 0x58 `b"A"`'s and this will also send a new line totaling 0x59 bytes
             - This is important because it stomps the first byte of the canary which is also zero
     - This lets us control the return address on the stack if we know the canary
         - Since there is no PIE we can just return to `your_goal` which prints the flag

